@@ -1,0 +1,110 @@
+DATABASE NAME-user_detail
+TABLE-1.user
+2.product
+3.book_table #request table
+
+admin id-pra_1
+password -abcd
+
+#to check user vailed or not
+  q="select user_id from user"
+  cur.execute(q)
+  record=cur.fetchall()
+
+
+#for create sr_no for user 
+qry="select max(sr_no) from user"
+cur.execute(qry)
+rec=cur.fetchone()
+
+#to insert a record in user
+q="insert into user values (%d,'%s','%s','%s',%d,'%s',%d,'%s')"%(sn,name,uid,id,mob,occup,bs_salry,ep)
+cur.execute(q)
+con.commit()
+
+#user vailed or not
+qry="select user_id from user where user_id='%s'"%(id)
+cur.execute(qry)
+rec=cur.fetchone()
+
+q="select password from user where password='%s'"%(ep)  #encripted password
+cur.execute(q)
+record=cur.fetchone()
+
+#create sr_no for product
+   q="select max(sr_no) from product"
+   cur.execute(q)
+   rec=cur.fetchone()
+
+#insert record into product
+ qry="insert into product values (%d,'%s','%s','%s','%s','%s','%s')"%(sn,pd_id,pd_name,size,totalamount,location,status)
+ cur.execute(qry)
+ con.commit()
+
+#to display record
+#for LAND
+  qry="select * from product where product_type='LAND'"
+  cur.execute(qry)
+  rec=cur.fetchall()
+
+#to display record
+#for PLOT
+ 
+   qry="select * from product where product_type='PLOT'and status='FOR SALE'"
+   cur.execute(qry)
+   rec=cur.fetchall()
+
+#to display record
+#for FLAT
+
+        qry="select * from product where product_type='FLAT'and status='FOR SALE'"
+        cur.execute(qry)
+        rec=cur.fetchall()
+
+#update user record
+
+           qry="update user SET email_id='%s' where user_id='%s'"%(eid,ur_id)
+           cur.execute(qry)
+           con.commit()
+
+
+           qry="update user SET mobile_no=%d where user_id='%s'"%(mob_no,ur_id)
+           cur.execute(qry)
+           con.commit()
+
+#update product record
+                qry="update product SET amount='%s' where product_id='%s'"%(app,p_id)
+                cur.execute(qry)
+                con.commit()
+
+             qry="update product SET status='%s' where product_id='%s'"%(st,pd_id)
+             cur.execute(qry)
+             con.commit()
+#delete user record
+       qry="delete from user where user_id='%s'"%(u_id)
+       cur.execute(qry)
+       con.commit()
+#delete product record
+         q="delete from product where product_id='%s'"%(pd_id)
+         cur.execute(q)
+         con.commit()
+
+#create sr_no for book_table
+  qry="select max(sr_no) from book_table"
+  cur.execute(qry)
+  rec=cur.fetchone()
+
+#insert record into book_table
+    q="insert into book_table values (%d,'%s','%s','%s',%d,'%s','%s','%s')"%(sn,req_id,pd_id,u_nm,cur_mobno,email_id,appo_date,appo_time)
+    cur.execute(q)
+    con.commit()
+
+#display book_table record
+    qry="select * from book_table"
+    cur.execute(qry)
+    rec=cur.fetchall()
+
+#display user all record for admin
+   qry="select * from user"
+   cur.execute(qry)
+   rec=cur.fetchall()
